@@ -9,30 +9,39 @@
 #read in data from text file
 
 #column length
-cLength = 30
-col = 0
+
+with open('advocd3data.txt', 'r') as f:
+    lines = f.read().splitlines()
+    
+
+print(lines)
+
+# print(rows[1][3])
+# print(rows[2][6])
+# print(rows[3][9])
+# print(rows[4][1])
+# print(rows[5][4])
+
+row = 1
+col = 3
+numOfRows = len(lines)
+lenOfRow = len(lines[0])
+print("lenofRow:")
+print(lenOfRow)
 treeCount = 0
 
+for line in lines:
+    if col >= lenOfRow:
+        col = col%lenOfRow
+    print(row)
+    print(col)
+    if row < numOfRows:
+        print(lines[row][col])    
+        if lines[row][col] == "#":
+            treeCount += 1
 
-with open('2020/advocd3data.txt', 'r') as f:
-    for line in f:
-        row = line.split() 
+    row +=1
+    col +=3   
 
-        #move right 3 
-        col +=3
-        if col > cLength:
-            col = int(repr(col)[-1])
-
-        #go down 1
-        row = f.readline()
-        if row !="":
-            print(row)
-            print(col)
-            rowData = row[col]
-            #print (rowData)
-            #check for tree
-            if rowData == "#":
-                treeCount += 1
-                
+print("treeCount:")    
 print(treeCount)
-        
